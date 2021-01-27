@@ -1,0 +1,78 @@
+{
+  "name": "auk-workspace",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "test": "nyc mocha  --require ./test/register.js './packages/*/test/**/*.test.ts'",
+    "lint": " eslint ./packages && tsc --noEmit",
+    "build": "npm run lint && rollup -c build/rollup.config.js",
+    "release": "bash scripts/release.sh",
+    "preversion": "npm run test && npm run build",
+    "postversion": "git push && git push --tags",
+    "doc": "docsify serve ./docs"
+  },
+  "author": "jiangq.leaves@gmail.com",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.12.1",
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.12.1",
+    "@babel/plugin-proposal-optional-chaining": "^7.12.1",
+    "@babel/preset-env": "^7.12.1",
+    "@babel/preset-typescript": "^7.12.1",
+    "@babel/register": "^7.12.1",
+    "@rollup/plugin-babel": "^5.0.4",
+    "@rollup/plugin-commonjs": "^13.0.0",
+    "@rollup/plugin-node-resolve": "^8.1.0",
+    "@types/jsdom": "^16.2.3",
+    "@types/mocha": "^7.0.2",
+    "@typescript-eslint/eslint-plugin": "^4.4.1",
+    "@typescript-eslint/parser": "^4.4.1",
+    "babel-plugin-const-enum": "1.0.1",
+    "commitizen": "^4.2.1",
+    "cz-conventional-changelog": "^3.2.0",
+    "docsify": "^4.11.4",
+    "eslint": "^7.11.0",
+    "eslint-config-airbnb-typescript": "^12.0.0",
+    "eslint-plugin-import": "^2.22.1",
+    "husky": "^4.2.5",
+    "jsdom": "^16.2.2",
+    "mocha": "^8.1.3",
+    "nyc": "^15.1.0",
+    "rollup": "^2.31.0",
+    "rollup-plugin-copy": "^3.3.0",
+    "rollup-plugin-node-externals": "^2.2.0",
+    "tslib": "^2.0.3",
+    "typescript": "^4.1.3"
+  },
+  "nyc": {
+    "extension": [
+      ".ts",
+      ".tsx"
+    ],
+    "include": [
+      "packages/**/src"
+    ],
+    "exclude": [
+      "**/*.d.ts",
+      "**/*.test.ts"
+    ],
+    "reporter": [
+      "html"
+    ],
+    "all": true
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "eslintIgnore": [
+    "**/*.js"
+  ]
+}

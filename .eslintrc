@@ -1,0 +1,45 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "extends": ["plugin:@typescript-eslint/recommended", "airbnb-typescript/base"],
+  "parserOptions": {
+    "project": "./tsconfig.json",
+    "ecmaVersion": 2020,
+    "sourceType": "module"
+  },
+  "env": { "browser": true, "node": true },
+  "rules": {
+    "@typescript-eslint/no-unused-vars": "warn",
+    "class-methods-use-this": "off",
+    "max-len": ["error", { "code": 120, "ignoreTrailingComments": true }],
+    "consistent-return": "off",
+    "no-plusplus": "off",
+    "@typescript-eslint/no-explicit-any": ["error"],
+    "@typescript-eslint/no-use-before-define": ["error", { "functions": false, "classes": false }],
+    "@typescript-eslint/comma-dangle": [
+      "error",
+      {
+        "arrays": "never",
+        "objects": "always-multiline",
+        "enums": "always-multiline",
+        "imports": "never",
+        "exports": "never",
+        "functions": "never"
+      }
+    ],
+    "@typescript-eslint/member-delimiter-style": ["error"]
+  },
+  "settings": {
+    "import/extensions": [".ts", ".js"],
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".ts"]
+      }
+    }
+  },
+  "globals": {
+    "describe": true,
+    "it": true
+  }
+}
