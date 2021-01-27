@@ -1,0 +1,30 @@
+{
+  "name": "auk-vue",
+  "version": "0.0.1",
+  "description": "auk vue package",
+  "author": "Jiang Qiang <jiangq.leaves@gmail.com>",
+  "homepage": "",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "exports": {
+    "import": "./dist/index.js",
+    "require": "./dist/index.cjs"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "types": "src/index.ts",
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "peerDependencies": {
+    "vue":"^3.0.0",
+    "auk":"^0.0.1"
+  },
+  "devDependencies": {
+    "vue":"^3.0.0",
+    "auk":"^0.0.1"
+  }
+}
