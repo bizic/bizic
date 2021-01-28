@@ -1,6 +1,6 @@
 {
   "name": "saxony-vue",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "saxony vue package",
   "author": "Jiang Qiang <jiangq.leaves@gmail.com>",
   "homepage": "",
@@ -20,11 +20,11 @@
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "peerDependencies": {
-    "vue":"^3.0.0",
-    "saxony":"^0.0.1"
+    "vue": "^3.0.0",
+    "saxony": "^0.0.1"
   },
   "devDependencies": {
-    "vue":"^3.0.0",
-    "saxony":"^0.0.1"
+    "vue": "^3.0.0",
+    "saxony": "^0.0.1"
   }
 }
