@@ -1,4 +1,4 @@
-import AukCore from './core';
+import Saxony from './core';
 import Service from './service';
 import { inject } from './di';
 import type {
@@ -6,7 +6,7 @@ import type {
 } from './di';
 import Exception from './exception';
 
-export default AukCore;
+export default Saxony;
 
 export {
   Service,

@@ -1,15 +1,15 @@
 import {
   Component, h, ComponentOptionsMixin, defineComponent, SetupContext
 } from 'vue';
-import AukCore from 'auk';
+import Saxony from 'saxony';
 import { RootProvider, ScopedProvider } from './components';
 
 export function withRootProvider<T extends Component>(
   component: T,
-  aukCore: AukCore,
+  saxony: Saxony,
   mixins: ComponentOptionsMixin[] = []
 ): T {
-  return withComponentFactory(RootProvider, { auk: aukCore })(component, mixins);
+  return withComponentFactory(RootProvider, { saxony })(component, mixins);
 }
 
 export function withScopedProvider<T extends Component>(

@@ -1,9 +1,9 @@
 import { strict as assert } from 'assert';
 import { h, inject, defineComponent } from 'vue';
-import AukCore from 'auk';
+import SaxonyCore from 'saxony';
 
 import {
-  AUK_CORE_KEY, PROVIDER_KEY, RootProvider
+  SAXONY_CORE_KEY, PROVIDER_KEY, RootProvider
 } from '../src/components';
 import { createApp, nodeOps } from './vueTestUtils';
 
@@ -50,11 +50,11 @@ describe('vue/src/hoc.ts', () => {
   });
 
   it('withRootProvider should be ok', (cb) => {
-    const auk = new AukCore();
+    const saxony = new SaxonyCore();
 
     const TestComponent = defineComponent({
       setup() {
-        assert.equal(auk, inject(AUK_CORE_KEY));
+        assert.equal(saxony, inject(SAXONY_CORE_KEY));
         assert(inject(PROVIDER_KEY));
         cb();
         return () => h('div');
@@ -62,7 +62,7 @@ describe('vue/src/hoc.ts', () => {
     });
     const instance = createApp({
       setup() {
-        return () => h(withRootProvider(TestComponent, auk));
+        return () => h(withRootProvider(TestComponent, saxony));
       },
     });
     const root = nodeOps.createElement('div');
@@ -70,11 +70,11 @@ describe('vue/src/hoc.ts', () => {
   });
 
   it('withScopedProvider should be ok', (cb) => {
-    const auk = new AukCore();
+    const saxony = new SaxonyCore();
 
     const TestComponent = defineComponent({
       setup() {
-        assert.equal(auk, inject(AUK_CORE_KEY));
+        assert.equal(saxony, inject(SAXONY_CORE_KEY));
         assert(inject(PROVIDER_KEY));
         cb();
         return () => h('div');
@@ -82,7 +82,7 @@ describe('vue/src/hoc.ts', () => {
     });
     const instance = createApp({
       setup() {
-        return () => h(RootProvider, { auk }, () => h(withScopedProvider('11', TestComponent)));
+        return () => h(RootProvider, { saxony }, () => h(withScopedProvider('11', TestComponent)));
       },
     });
     const root = nodeOps.createElement('div');

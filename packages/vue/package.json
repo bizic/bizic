@@ -1,7 +1,7 @@
 {
-  "name": "auk-vue",
+  "name": "saxony-vue",
   "version": "0.0.1",
-  "description": "auk vue package",
+  "description": "saxony vue package",
   "author": "Jiang Qiang <jiangq.leaves@gmail.com>",
   "homepage": "",
   "license": "MIT",
@@ -21,10 +21,10 @@
   },
   "peerDependencies": {
     "vue":"^3.0.0",
-    "auk":"^0.0.1"
+    "saxony":"^0.0.1"
   },
   "devDependencies": {
     "vue":"^3.0.0",
-    "auk":"^0.0.1"
+    "saxony":"^0.0.1"
   }
 }

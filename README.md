@@ -1,7 +1,7 @@
-# Auk
+# Saxony
 
 ## Install 
 
 ```
-npm i auk
+npm i saxony
 ```

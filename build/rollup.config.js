@@ -14,7 +14,7 @@ function getPackageConfig(packageName, externals = []) {
       { file: `./packages/${packageName}/dist/index.js`, format: 'es' },
     ],
     ...defaultConfig,
-    external: ['vue', '@vue/reactivity', 'auk', ...externals],
+    external: ['vue', '@vue/reactivity', 'saxony', ...externals],
   };
 }
 
