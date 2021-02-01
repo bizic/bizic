@@ -13,8 +13,8 @@ export function withRootProvider<T extends Component>(
 }
 
 export function withScopedProvider<T extends Component>(
-  scopeId: string | symbol,
   component: T,
+  scopeId: string | symbol,
   meta: Record<PropertyKey, unknown> = {},
   mixins: ComponentOptionsMixin[] = []
 ): T {

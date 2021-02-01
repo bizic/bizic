@@ -82,7 +82,7 @@ describe('vue/src/hoc.ts', () => {
     });
     const instance = createApp({
       setup() {
-        return () => h(RootProvider, { saxony }, () => h(withScopedProvider('11', TestComponent)));
+        return () => h(RootProvider, { saxony }, () => h(withScopedProvider(TestComponent, '11')));
       },
     });
     const root = nodeOps.createElement('div');
