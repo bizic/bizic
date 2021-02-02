@@ -1,5 +1,6 @@
 /* eslint-disable max-classes-per-file */
 import { strict as assert } from 'assert';
+import { inject } from '../../../src';
 import { getProvider } from '../../../src/di/host';
 import BaseProvider from '../../../src/di/provider/base';
 
@@ -78,5 +79,17 @@ describe('core/src/di/provider/base.ts', () => {
 
     ]));
     provider.getService('service');
+  });
+  it('circular dependencies should throw exceptions', () => {
+    const provider = new BaseProvider(new Map([
+      ['serviceA', () => `A${inject('serviceC')}`],
+      ['serviceB', () => `B${inject('serviceA')}`],
+      ['serviceC', () => `C${inject('serviceB')}`]
+
+    ]));
+    assert.throws(
+      () => provider.getService('serviceA'),
+      { message: 'Service \'serviceA\' has circular dependencies: serviceA -> serviceC -> serviceB -> serviceA' }
+    );
   });
 });

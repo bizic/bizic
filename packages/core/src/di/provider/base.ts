@@ -1,3 +1,4 @@
+import Exception from '../../exception';
 import { execWithProvider } from '../host';
 
 export type ServiceFactory<T = unknown> = ServiceClassFactory<T> | ServiceFunctionalFactory<T>;
@@ -36,6 +37,8 @@ export default class BaseProvider implements Provider {
 
   protected meta: Record<PropertyKey, unknown>;
 
+  private instancesWillCreated: Set<ServiceName> = new Set();
+
   constructor(factories: Map<ServiceName, ServiceFactory>, meta: Record<PropertyKey, unknown> = {}) {
     this.factories = factories;
     this.meta = meta;
@@ -46,15 +49,24 @@ export default class BaseProvider implements Provider {
     if (instance === undefined) {
       const factory = this.factories.get(key);
       if (factory !== undefined) {
-        instance = this.createInstance(factory, this);
+        instance = this.createInstance(key, factory);
         this.services.set(key, instance);
       }
     }
     return instance;
   }
 
-  protected createInstance<K extends ServiceName>(factory: ServiceFactory, provider: Provider): ServiceTypeMap[K] {
-    return execWithProvider(provider,
-      () => ('create' in factory ? factory.create(this.meta) : factory(this.meta)) as ServiceTypeMap[K]);
+  protected createInstance<K extends ServiceName>(key: K, factory: ServiceFactory): ServiceTypeMap[K] {
+    try {
+      if (this.instancesWillCreated.has(key)) {
+        const dependencyRelationship = [...this.instancesWillCreated, key].join(' -> ');
+        throw new Exception(`Service '${key}' has circular dependencies: ${dependencyRelationship}`);
+      }
+      this.instancesWillCreated.add(key);
+      return execWithProvider(this,
+        () => ('create' in factory ? factory.create(this.meta) : factory(this.meta)) as ServiceTypeMap[K]);
+    } finally {
+      this.instancesWillCreated.delete(key);
+    }
   }
 }

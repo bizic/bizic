@@ -37,7 +37,7 @@ export default class RootProvider extends BaseProvider {
     if (instance === undefined) {
       const factoryWithScopes = this.sharedFactories.get(scopeId)?.get(key);
       if (factoryWithScopes !== undefined) {
-        instance = this.createInstance(factoryWithScopes.factory, this);
+        instance = this.createInstance(key, factoryWithScopes.factory);
         factoryWithScopes.scopes.forEach((id) => this.cacheSharedService<K>(id, key, instance!)); // eslint-disable-line @typescript-eslint/no-non-null-assertion
       }
     }
