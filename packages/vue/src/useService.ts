@@ -1,5 +1,5 @@
 import { inject } from 'vue';
-import { Provider, ServiceTypeMap, ServiceName } from 'saxony';
+import { Provider, ServiceTypeMap, ServiceName } from 'bizic';
 import { PROVIDER_KEY } from './components';
 
 function useService<T extends ServiceName>(key: T): ServiceTypeMap[T];

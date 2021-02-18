@@ -1,9 +1,9 @@
 import DI from './di';
 
 export interface Plugin {
-  install(core: Saxony): void;
+  install(core: Bizic): void;
 }
-export default class Saxony extends DI {
+export default class Bizic extends DI {
   use(plugin: Plugin): void {
     plugin.install(this);
   }

@@ -1,15 +1,15 @@
 import {
   Component, h, ComponentOptionsMixin, defineComponent, SetupContext
 } from 'vue';
-import Saxony from 'saxony';
+import Bizic from 'bizic';
 import { RootProvider, ScopedProvider } from './components';
 
 export function withRootProvider<T extends Component>(
   component: T,
-  saxony: Saxony,
+  bizic: Bizic,
   mixins: ComponentOptionsMixin[] = []
 ): T {
-  return withComponentFactory(RootProvider, { saxony })(component, mixins);
+  return withComponentFactory(RootProvider, { bizic })(component, mixins);
 }
 
 export function withScopedProvider<T extends Component>(

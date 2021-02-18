@@ -1,25 +1,25 @@
 import {
   defineComponent, PropType, provide, SetupContext, inject
 } from 'vue';
-import Saxony, { Provider } from 'saxony';
+import Bizic, { Provider } from 'bizic';
 
 export const PROVIDER_KEY = Symbol('provider');
-export const SAXONY_CORE_KEY = Symbol('saxony');
+export const SAXONY_CORE_KEY = Symbol('bizic');
 
 export interface RootProviderProps {
-  saxony: Saxony;
+  bizic: Bizic;
   meta?: Record<PropertyKey, unknown>;
 }
 
 export const RootProvider = defineComponent({
   name: 'RootProvider',
   props: {
-    saxony: { type: Object as PropType<RootProviderProps['saxony']>, required: true },
+    bizic: { type: Object as PropType<RootProviderProps['bizic']>, required: true },
   },
   setup(props: RootProviderProps, context: SetupContext) {
-    const provider = props.saxony.getRootProvider();
+    const provider = props.bizic.getRootProvider();
     provide(PROVIDER_KEY, provider);
-    provide(SAXONY_CORE_KEY, props.saxony);
+    provide(SAXONY_CORE_KEY, props.bizic);
     return () => (context.slots.default ? context.slots.default()[0] : null);
   },
 });
@@ -36,11 +36,11 @@ export const ScopedProvider = defineComponent({
     meta: { type: Object as PropType<ScopedProviderProps['meta']>, required: false },
   },
   setup(props: ScopedProviderProps, context: SetupContext) {
-    const saxonyCore = inject<Saxony>(SAXONY_CORE_KEY);
-    if (saxonyCore === undefined) {
+    const bizicCore = inject<Bizic>(SAXONY_CORE_KEY);
+    if (bizicCore === undefined) {
       throw new Error('No root provider found');
     }
-    const provider = saxonyCore.getScopedProvider(props.id, props.meta);
+    const provider = bizicCore.getScopedProvider(props.id, props.meta);
     const parentProvider = inject<Provider>(PROVIDER_KEY)!; // eslint-disable-line @typescript-eslint/no-non-null-assertion
     provider.setParent(parentProvider);
     provide(PROVIDER_KEY, provider);

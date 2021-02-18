@@ -1,5 +1,5 @@
 /* eslint-disable max-classes-per-file */
-import { Service } from 'saxony';
+import { Service } from 'bizic';
 
 import { makeAutoObserver } from './observe';
 

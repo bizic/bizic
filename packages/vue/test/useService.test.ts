@@ -1,5 +1,5 @@
 import { strict as assert } from 'assert';
-import Saxony from 'saxony';
+import Bizic from 'bizic';
 import { defineComponent, h } from 'vue';
 import useService from '../src/useService';
 import { createApp, nodeOps } from './vueTestUtils';
@@ -9,9 +9,9 @@ describe('vue/src/useService.ts', () => {
   it('useService should be ok', (cb) => {
     const meta = { name: 'na' };
 
-    const saxony = new Saxony({ meta });
+    const bizic = new Bizic({ meta });
 
-    saxony.registerServiceFactory('service', (data) => {
+    bizic.registerServiceFactory('service', (data) => {
       assert.equal(data, meta);
       return 1;
     });
@@ -26,7 +26,7 @@ describe('vue/src/useService.ts', () => {
     });
     const instance = createApp({
       setup() {
-        return () => h(RootProvider, { saxony, meta }, () => h(TestComponent));
+        return () => h(RootProvider, { bizic, meta }, () => h(TestComponent));
       },
     });
     const root = nodeOps.createElement('div');

@@ -1,6 +1,6 @@
 import { strict as assert } from 'assert';
 import { h, defineComponent, inject } from 'vue';
-import Saxony from 'saxony';
+import Bizic from 'bizic';
 import {
   SAXONY_CORE_KEY, PROVIDER_KEY, RootProvider, ScopedProvider
 } from '../src/components';
@@ -9,11 +9,11 @@ import useService from '../src/useService';
 
 describe('vue/src/components.ts', () => {
   it('RootProvider provider should be ok', (cb) => {
-    const saxony = new Saxony();
+    const bizic = new Bizic();
 
     const TestComponent = defineComponent({
       setup() {
-        assert.equal(saxony, inject(SAXONY_CORE_KEY));
+        assert.equal(bizic, inject(SAXONY_CORE_KEY));
         assert(inject(PROVIDER_KEY));
         cb();
         return () => h('div');
@@ -21,7 +21,7 @@ describe('vue/src/components.ts', () => {
     });
     const instance = createApp({
       setup() {
-        return () => h(RootProvider, { saxony }, () => h(TestComponent));
+        return () => h(RootProvider, { bizic }, () => h(TestComponent));
       },
     });
     const root = nodeOps.createElement('div');
@@ -31,9 +31,9 @@ describe('vue/src/components.ts', () => {
   it('RootProvider props should be ok', (cb) => {
     const meta = { name: 'na' };
 
-    const saxony = new Saxony({ meta });
+    const bizic = new Bizic({ meta });
 
-    saxony.registerServiceFactory('service', (data) => {
+    bizic.registerServiceFactory('service', (data) => {
       assert.equal(data, meta);
       return 1;
     });
@@ -48,7 +48,7 @@ describe('vue/src/components.ts', () => {
     });
     const instance = createApp({
       setup() {
-        return () => h(RootProvider, { saxony }, () => h(TestComponent));
+        return () => h(RootProvider, { bizic }, () => h(TestComponent));
       },
     });
     const root = nodeOps.createElement('div');
@@ -56,10 +56,10 @@ describe('vue/src/components.ts', () => {
   });
 
   it('RootProvider should be ok with empty children', () => {
-    const saxony = new Saxony();
+    const bizic = new Bizic();
     const instance = createApp({
       setup() {
-        return () => h(RootProvider, { saxony });
+        return () => h(RootProvider, { bizic });
       },
     });
     const root = nodeOps.createElement('div');
@@ -69,15 +69,15 @@ describe('vue/src/components.ts', () => {
   it('ScopedProvider provider should be ok', (cb) => {
     const meta = { name: 'na' };
 
-    const saxony = new Saxony({ meta });
+    const bizic = new Bizic({ meta });
     const scopedMeta = { name: 'scoped' };
     const scopeId = 'scopeId2';
-    saxony.registerServiceFactory('service', (data) => {
+    bizic.registerServiceFactory('service', (data) => {
       assert.equal(data, meta);
       return 1;
     });
 
-    saxony.registerScopedServiceFactory(scopeId, 'scopedService', (data: unknown) => {
+    bizic.registerScopedServiceFactory(scopeId, 'scopedService', (data: unknown) => {
       const val = data as typeof scopedMeta & { scopeId: string };
       assert.equal(val.scopeId, scopeId);
       assert.equal(val.name, scopedMeta.name);
@@ -86,7 +86,7 @@ describe('vue/src/components.ts', () => {
 
     const TestComponent = defineComponent({
       setup() {
-        assert.equal(saxony, inject(SAXONY_CORE_KEY));
+        assert.equal(bizic, inject(SAXONY_CORE_KEY));
         assert(inject(PROVIDER_KEY));
         const service = useService('service');
         assert.equal(service, 1);
@@ -100,7 +100,7 @@ describe('vue/src/components.ts', () => {
       setup() {
         return () => h(
           RootProvider,
-          { saxony },
+          { bizic },
           () => h(
             ScopedProvider,
             { id: scopeId, meta: scopedMeta },
@@ -113,14 +113,14 @@ describe('vue/src/components.ts', () => {
     instance.mount(root);
   });
   it('ScopedProvider should be ok with empty children', () => {
-    const saxony = new Saxony();
+    const bizic = new Bizic();
     const scopeId = '2';
 
     const instance = createApp({
       setup() {
         return () => h(
           RootProvider,
-          { saxony },
+          { bizic },
           () => h(
             ScopedProvider,
             { id: scopeId }

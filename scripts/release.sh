@@ -43,7 +43,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
   git commit -m "chore($PACKAGE): release v$VERSION"
 
   # tag
-  git tag saxony-$PACKAGE@$VERSION
+  git tag bizic-$PACKAGE@$VERSION
 
   # push
   git push --tags

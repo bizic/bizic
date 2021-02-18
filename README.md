@@ -1,7 +1,7 @@
-# Saxony
+# Bizic
 
 ## Install 
 
 ```
-npm i saxony
+npm i bizic
 ```

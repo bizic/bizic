@@ -1,6 +1,6 @@
 import { strict as assert } from 'assert';
 import { h, inject, defineComponent } from 'vue';
-import SaxonyCore from 'saxony';
+import BizicCore from 'bizic';
 
 import {
   SAXONY_CORE_KEY, PROVIDER_KEY, RootProvider
@@ -50,11 +50,11 @@ describe('vue/src/hoc.ts', () => {
   });
 
   it('withRootProvider should be ok', (cb) => {
-    const saxony = new SaxonyCore();
+    const bizic = new BizicCore();
 
     const TestComponent = defineComponent({
       setup() {
-        assert.equal(saxony, inject(SAXONY_CORE_KEY));
+        assert.equal(bizic, inject(SAXONY_CORE_KEY));
         assert(inject(PROVIDER_KEY));
         cb();
         return () => h('div');
@@ -62,7 +62,7 @@ describe('vue/src/hoc.ts', () => {
     });
     const instance = createApp({
       setup() {
-        return () => h(withRootProvider(TestComponent, saxony));
+        return () => h(withRootProvider(TestComponent, bizic));
       },
     });
     const root = nodeOps.createElement('div');
@@ -70,11 +70,11 @@ describe('vue/src/hoc.ts', () => {
   });
 
   it('withScopedProvider should be ok', (cb) => {
-    const saxony = new SaxonyCore();
+    const bizic = new BizicCore();
 
     const TestComponent = defineComponent({
       setup() {
-        assert.equal(saxony, inject(SAXONY_CORE_KEY));
+        assert.equal(bizic, inject(SAXONY_CORE_KEY));
         assert(inject(PROVIDER_KEY));
         cb();
         return () => h('div');
@@ -82,7 +82,7 @@ describe('vue/src/hoc.ts', () => {
     });
     const instance = createApp({
       setup() {
-        return () => h(RootProvider, { saxony }, () => h(withScopedProvider(TestComponent, '11')));
+        return () => h(RootProvider, { bizic }, () => h(withScopedProvider(TestComponent, '11')));
       },
     });
     const root = nodeOps.createElement('div');
