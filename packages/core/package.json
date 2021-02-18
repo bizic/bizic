@@ -3,7 +3,7 @@
   "version": "0.0.3-0",
   "description": "bizic core package",
   "author": "Jiang Qiang <jiangq.leaves@gmail.com>",
-  "homepage": "",
+  "homepage": "https://bizic.github.io",
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -12,6 +12,19 @@
     "import": "./dist/index.js",
     "require": "./dist/index.cjs"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bizic/bizic.git",
+    "directory": "packages/core"
+  },
+  "bugs": "https://github.com/bizic/bizic/issues",
+  "keywords": [
+    "bizic",
+    "bizic.js",
+    "bizicjs",
+    "ioc",
+    "di"
+  ],
   "engines": {
     "node": ">=14.0.0"
   },
