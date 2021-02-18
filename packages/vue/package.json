@@ -3,7 +3,7 @@
   "version": "0.0.3-1",
   "description": "bizic vue package",
   "author": "Jiang Qiang <jiangq.leaves@gmail.com>",
-  "homepage": "",
+  "homepage": "https://bizic.github.io",
   "license": "MIT",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -12,6 +12,20 @@
     "import": "./dist/index.js",
     "require": "./dist/index.cjs"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bizic/bizic.git",
+    "directory": "packages/vue"
+  },
+  "keywords": [
+    "bizic",
+    "bizic.js",
+    "bizicjs",
+    "ioc",
+    "di",
+    "bizic-vue",
+    "vue"
+  ],
   "engines": {
     "node": ">=14.0.0"
   },
