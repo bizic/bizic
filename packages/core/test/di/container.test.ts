@@ -1,5 +1,5 @@
 import { strict as assert } from 'assert';
-import Container from '../../src/di/Container';
+import Container from '../../src/di/container';
 
 class TestableContainer extends Container {
   getServiceFactories() {
