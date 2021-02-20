@@ -1,7 +1,7 @@
 import {
   defineComponent, PropType, provide, SetupContext, inject
 } from 'vue';
-import Bizic, { Provider } from 'bizic';
+import Bizic, { Provider, Exception } from 'bizic';
 
 export const PROVIDER_KEY = Symbol('provider');
 export const SAXONY_CORE_KEY = Symbol('bizic');
@@ -36,11 +36,11 @@ export const ScopedProvider = defineComponent({
     meta: { type: Object as PropType<ScopedProviderProps['meta']>, required: false },
   },
   setup(props: ScopedProviderProps, context: SetupContext) {
-    const bizicCore = inject<Bizic>(SAXONY_CORE_KEY);
-    if (bizicCore === undefined) {
-      throw new Error('No root provider found');
+    const bizic = inject<Bizic>(SAXONY_CORE_KEY);
+    if (bizic === undefined) {
+      throw new Exception('No root provider found');
     }
-    const provider = bizicCore.getScopedProvider(props.id, props.meta);
+    const provider = bizic.getScopedProvider(props.id, props.meta);
     const parentProvider = inject<Provider>(PROVIDER_KEY)!; // eslint-disable-line @typescript-eslint/no-non-null-assertion
     provider.setParent(parentProvider);
     provide(PROVIDER_KEY, provider);
