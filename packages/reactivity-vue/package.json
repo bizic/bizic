@@ -1,6 +1,6 @@
 {
   "name": "bizic-reactivity-vue",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "bizic reactivity system implemented by vue",
   "author": "Jiang Qiang <jiangq.leaves@gmail.com>",
   "homepage": "https://bizic.github.io",
@@ -38,7 +38,7 @@
     "bizic": "^0.0.3"
   },
   "devDependencies": {
-    "vue":"^3.0.0",
+    "vue": "^3.0.0",
     "@vue/reactivity": "^3.0.0",
     "bizic": "^0.0.3"
   }

@@ -1,6 +1,6 @@
 import { strict as assert } from 'assert';
 import { h, inject, defineComponent } from 'vue';
-import BizicCore from 'bizic';
+import Bizic from 'bizic';
 
 import {
   SAXONY_CORE_KEY, PROVIDER_KEY, RootProvider
@@ -50,7 +50,7 @@ describe('vue/src/hoc.ts', () => {
   });
 
   it('withRootProvider should be ok', (cb) => {
-    const bizic = new BizicCore();
+    const bizic = new Bizic();
 
     const TestComponent = defineComponent({
       setup() {
@@ -70,7 +70,7 @@ describe('vue/src/hoc.ts', () => {
   });
 
   it('withScopedProvider should be ok', (cb) => {
-    const bizic = new BizicCore();
+    const bizic = new Bizic();
 
     const TestComponent = defineComponent({
       setup() {
