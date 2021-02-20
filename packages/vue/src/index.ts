@@ -2,7 +2,7 @@ import {
   withRootProvider, withScopedProvider
 } from './hoc';
 import {
-  SAXONY_CORE_KEY, PROVIDER_KEY, RootProvider, RootProviderProps, ScopedProvider, ScopedProviderProps
+  BIZIC_KEY, PROVIDER_KEY, RootProvider, RootProviderProps, ScopedProvider, ScopedProviderProps
 } from './components';
 import useService from './useService';
 
@@ -13,7 +13,7 @@ export {
   withRootProvider,
   withScopedProvider,
   PROVIDER_KEY,
-  SAXONY_CORE_KEY
+  BIZIC_KEY
 };
 export type {
   RootProviderProps,

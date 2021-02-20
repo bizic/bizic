@@ -3,7 +3,7 @@ import { h, inject, defineComponent } from 'vue';
 import Bizic from 'bizic';
 
 import {
-  SAXONY_CORE_KEY, PROVIDER_KEY, RootProvider
+  BIZIC_KEY, PROVIDER_KEY, RootProvider
 } from '../src/components';
 import { createApp, nodeOps } from './vueTestUtils';
 
@@ -54,7 +54,7 @@ describe('vue/src/hoc.ts', () => {
 
     const TestComponent = defineComponent({
       setup() {
-        assert.equal(bizic, inject(SAXONY_CORE_KEY));
+        assert.equal(bizic, inject(BIZIC_KEY));
         assert(inject(PROVIDER_KEY));
         cb();
         return () => h('div');
@@ -74,7 +74,7 @@ describe('vue/src/hoc.ts', () => {
 
     const TestComponent = defineComponent({
       setup() {
-        assert.equal(bizic, inject(SAXONY_CORE_KEY));
+        assert.equal(bizic, inject(BIZIC_KEY));
         assert(inject(PROVIDER_KEY));
         cb();
         return () => h('div');

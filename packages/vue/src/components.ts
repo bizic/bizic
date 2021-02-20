@@ -4,7 +4,7 @@ import {
 import Bizic, { Provider, Exception } from 'bizic';
 
 export const PROVIDER_KEY = Symbol('provider');
-export const SAXONY_CORE_KEY = Symbol('bizic');
+export const BIZIC_KEY = Symbol('bizic');
 
 export interface RootProviderProps {
   bizic: Bizic;
@@ -19,7 +19,7 @@ export const RootProvider = defineComponent({
   setup(props: RootProviderProps, context: SetupContext) {
     const provider = props.bizic.getRootProvider();
     provide(PROVIDER_KEY, provider);
-    provide(SAXONY_CORE_KEY, props.bizic);
+    provide(BIZIC_KEY, props.bizic);
     return () => (context.slots.default ? context.slots.default()[0] : null);
   },
 });
@@ -36,7 +36,7 @@ export const ScopedProvider = defineComponent({
     meta: { type: Object as PropType<ScopedProviderProps['meta']>, required: false },
   },
   setup(props: ScopedProviderProps, context: SetupContext) {
-    const bizic = inject<Bizic>(SAXONY_CORE_KEY);
+    const bizic = inject<Bizic>(BIZIC_KEY);
     if (bizic === undefined) {
       throw new Exception('No root provider found');
     }
