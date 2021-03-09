@@ -9,20 +9,20 @@ export type ScopeId = string | symbol;
 export default class ScopedProvider extends BaseProvider {
   protected shared: Provider | undefined;
 
-  protected parent: Provider;
+  protected parent: RootProvider | ScopedProvider;
 
   scopeId: ScopeId;
 
   constructor(
     scopeId: ScopeId,
-    rootProvider: RootProvider,
+    parentProvider: RootProvider | ScopedProvider,
     factories: Map<ServiceName, ServiceFactory>,
     meta: Record<PropertyKey, unknown> = {}
   ) {
     super(factories, { scopeId, ...meta });
     this.scopeId = scopeId;
-    this.parent = rootProvider;
-    this.shared = rootProvider.getVirtualSharedProvider(scopeId);
+    this.parent = parentProvider;
+    this.shared = this.getRootProvider().getVirtualSharedProvider(scopeId);
   }
 
   getService<K extends ServiceName>(key: K): ServiceTypeMap[K] | undefined {
@@ -31,7 +31,11 @@ export default class ScopedProvider extends BaseProvider {
       || this.parent.getService(key);
   }
 
-  setParent(provider: Provider): void {
-    this.parent = provider;
+  getRootProvider(): RootProvider {
+    const provider = this.parent;
+
+    if (provider instanceof RootProvider) { return provider; }
+
+    return provider.getRootProvider();
   }
 }

@@ -17,14 +17,14 @@ class TestableContainer extends Container {
 
 describe('core/src/di/container', () => {
   it('get root provider should be ok', (done) => {
-    const container = new TestableContainer({ meta: { some: 'hi' } });
+    const container = new TestableContainer();
     container.registerServiceFactory('test', (data) => {
       assert.equal((data as { some: string }).some, 'hi');
       done();
       return 1;
     });
-    const provider = container.getRootProvider();
-    assert.equal(provider, container.getRootProvider());
+    const provider = container.getRootProvider({ some: 'hi' });
+    assert(provider);
     provider.getService('test');
   });
 
@@ -112,7 +112,8 @@ describe('core/src/di/container', () => {
     const serviceAFactory = () => 'serviceAInstance';
 
     container.registerScopedServiceFactory(scopeId, 'serviceA', serviceAFactory);
-    const provider = container.getScopedProvider(scopeId);
+    const rootProvider = container.getRootProvider();
+    const provider = container.getScopedProvider(scopeId, rootProvider);
     assert.equal(provider.getService('serviceA'), 'serviceAInstance');
   });
 
@@ -125,7 +126,9 @@ describe('core/src/di/container', () => {
     };
 
     container.registerScopedServiceFactory(scopeId, 'serviceA', serviceAFactory);
-    const provider = container.getScopedProvider(scopeId, { name: 'test' });
+    const rootProvider = container.getRootProvider();
+
+    const provider = container.getScopedProvider(scopeId, rootProvider, { name: 'test' });
     assert.equal(provider.getService('serviceA'), 'serviceAInstance');
   });
 });

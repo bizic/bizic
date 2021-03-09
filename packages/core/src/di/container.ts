@@ -1,4 +1,7 @@
-import { ServiceFactory, ServiceName, ServiceTypeMap } from './provider/base';
+import Exception from '../exception';
+import {
+  Provider, ServiceFactory, ServiceName, ServiceTypeMap
+} from './provider/base';
 import RootProvider, { SharedServiceFactoryMap } from './provider/root';
 import ScopedProvider, { ScopeId } from './provider/scope';
 
@@ -53,17 +56,22 @@ export default class Container {
     });
   }
 
-  getRootProvider(): RootProvider {
-    if (this.rootProvider === undefined) {
-      this.rootProvider = new RootProvider(this.serviceFactories, this.sharedServiceFactories, this.option.meta);
-    }
-    return this.rootProvider;
+  getRootProvider(meta?: Record<PropertyKey, unknown>): RootProvider {
+    return new RootProvider(this.serviceFactories, this.sharedServiceFactories, meta);
   }
 
-  getScopedProvider(scopedId: string | symbol, meta?: Record<PropertyKey, unknown>): ScopedProvider {
+  getScopedProvider(
+    scopedId: string | symbol,
+    parentProvider: Provider,
+    meta?: Record<PropertyKey, unknown>
+  ): ScopedProvider {
     const factories = this.scopedServiceFactories.get(scopedId) || new Map();
-    const rootProvider = this.getRootProvider();
-    const provider = new ScopedProvider(scopedId, rootProvider, factories, meta);
+    if (!(parentProvider instanceof RootProvider || parentProvider instanceof ScopedProvider)) {
+      throw new Exception(
+        'Invalid params \'parentProvider\' in function \'getScopedProvider(scopedId, parentProvider, meta)\''
+      );
+    }
+    const provider = new ScopedProvider(scopedId, parentProvider, factories, meta);
     return provider;
   }
 }

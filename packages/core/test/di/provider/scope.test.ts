@@ -69,8 +69,7 @@ describe('core/src/di/provider/scope.ts', () => {
     const provider = new RootProvider(factories, sharedFactories);
 
     const parentScopeProvider = new ScopeProvider(scopeId, provider, new Map([['serviceFromParent', () => 3]]));
-    const scopeProvider = new ScopeProvider(scopeId, provider, new Map());
-    scopeProvider.setParent(parentScopeProvider);
+    const scopeProvider = new ScopeProvider(scopeId, parentScopeProvider, new Map());
     assert.equal(scopeProvider.getService('serviceFromParent'), 3);
     assert.equal(scopeProvider.getService('serviceFromShared'), 1);
     assert.equal(scopeProvider.getService('serviceFromRoot'), 2);
