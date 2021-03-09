@@ -35,10 +35,10 @@
   },
   "peerDependencies": {
     "vue": "^3.0.0",
-    "bizic": "^0.0.3"
+    "bizic": "^0.0.4"
   },
   "devDependencies": {
     "vue": "^3.0.0",
-    "bizic": "^0.0.3"
+    "bizic": "^0.0.4"
   }
 }
