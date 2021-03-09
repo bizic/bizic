@@ -7,9 +7,10 @@ import { RootProvider, ScopedProvider } from './components';
 export function withRootProvider<T extends Component>(
   component: T,
   bizic: Bizic,
+  meta: Record<PropertyKey, unknown> = {},
   mixins: ComponentOptionsMixin[] = []
 ): T {
-  return withComponentFactory(RootProvider, { bizic })(component, mixins);
+  return withComponentFactory(RootProvider, { bizic, meta })(component, mixins);
 }
 
 export function withScopedProvider<T extends Component>(

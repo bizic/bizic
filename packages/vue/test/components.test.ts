@@ -48,7 +48,7 @@ describe('vue/src/components.ts', () => {
     });
     const instance = createApp({
       setup() {
-        return () => h(RootProvider, { bizic }, () => h(TestComponent));
+        return () => h(RootProvider, { bizic, meta }, () => h(TestComponent));
       },
     });
     const root = nodeOps.createElement('div');
@@ -69,7 +69,7 @@ describe('vue/src/components.ts', () => {
   it('ScopedProvider provider should be ok', (cb) => {
     const meta = { name: 'na' };
 
-    const bizic = new Bizic({ meta });
+    const bizic = new Bizic();
     const scopedMeta = { name: 'scoped' };
     const scopeId = 'scopeId2';
     bizic.registerServiceFactory('service', (data) => {
@@ -100,7 +100,7 @@ describe('vue/src/components.ts', () => {
       setup() {
         return () => h(
           RootProvider,
-          { bizic },
+          { bizic, meta },
           () => h(
             ScopedProvider,
             { id: scopeId, meta: scopedMeta },
