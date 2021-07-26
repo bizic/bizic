@@ -7,11 +7,11 @@ function getPackageConfig(packageName, externals = []) {
     input: `./packages/${packageName}/src/index.ts`,
     output: [
       {
-        file: `./packages/${packageName}/dist/index.cjs`,
+        file: `./packages/${packageName}/dist/index.js`,
         format: 'cjs',
         exports: 'named',
       },
-      { file: `./packages/${packageName}/dist/index.js`, format: 'es' },
+      { file: `./packages/${packageName}/dist/index.esm.js`, format: 'es' },
     ],
     ...defaultConfig,
     external: ['vue', '@vue/reactivity', 'bizic', ...externals],
