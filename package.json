@@ -10,7 +10,7 @@
   "scripts": {
     "test": "nyc mocha  --require ./test/register.js './packages/*/test/**/*.test.ts'",
     "lint": " eslint ./packages && tsc --noEmit",
-    "build": "rollup -c build/rollup.config.js",
+    "build": "npm run lint && rollup -c build/rollup.config.js",
     "release": "bash scripts/release.sh",
     "preversion": "npm run test && npm run build",
     "postversion": "git push && git push --tags",
