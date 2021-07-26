@@ -6,11 +6,11 @@
   "homepage": "https://bizic.github.io",
   "license": "MIT",
   "type": "module",
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
+  "main": "./dist/index.js",
+  "module": "./dist/index.esm.js",
   "exports": {
-    "import": "./dist/index.js",
-    "require": "./dist/index.cjs"
+    "import": "./dist/index.esm.js",
+    "require": "./dist/index.js"
   },
   "repository": {
     "type": "git",
